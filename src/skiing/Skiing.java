@@ -4,18 +4,18 @@ import java.util.ArrayList;
 
 public class Skiing {
 
-    private int[][] inputArray;
+    private int[][] input;
     private ArrayList<Integer> [][] cached;
 
     public Skiing(int[][] input) {
-        this.inputArray = input;
+        this.input = input;
         this.cached = new ArrayList[input.length][input[0].length];
     }
 
     public ArrayList<Integer> longestPath() {
         ArrayList<Integer> curMax= null;
-        for(int ii=0; ii<inputArray.length; ii++) {
-            for (int jj=0; jj<inputArray[0].length; jj++){
+        for(int ii = 0; ii< input.length; ii++) {
+            for (int jj = 0; jj< input[0].length; jj++){
                 if(curMax == null){
                     curMax = getLongestPath(ii,jj);
                 } else {
@@ -32,33 +32,33 @@ public class Skiing {
             return cached[row][column];
         }
 
-        ArrayList<Integer> lmax = new ArrayList<>();
-        ArrayList<Integer> rmax = new ArrayList<>();
-        ArrayList<Integer> tmax = new ArrayList<>();
-        ArrayList<Integer> bmax = new ArrayList<>();
+        ArrayList<Integer> leftMax = new ArrayList<>();
+        ArrayList<Integer> rightMax = new ArrayList<>();
+        ArrayList<Integer> topMax = new ArrayList<>();
+        ArrayList<Integer> bottomMax = new ArrayList<>();
 
-        lmax.add(inputArray[row][column]);
-        rmax.add(inputArray[row][column]);
-        tmax.add(inputArray[row][column]);
-        bmax.add(inputArray[row][column]);
+        leftMax.add(input[row][column]);
+        rightMax.add(input[row][column]);
+        topMax.add(input[row][column]);
+        bottomMax.add(input[row][column]);
 
-        if (column-1 >= 0 && inputArray[row][column-1] < inputArray[row][column]) {
-            lmax.addAll(getLongestPath(row, column-1));
+        if (column-1 >= 0 && input[row][column-1] < input[row][column]) {
+            leftMax.addAll(getLongestPath(row, column-1));
         }
 
-        if (column+1 < inputArray[0].length && inputArray[row][column+1] < inputArray[row][column]) {
-            rmax.addAll(getLongestPath(row, column+1));
+        if (column+1 < input[0].length && input[row][column+1] < input[row][column]) {
+            rightMax.addAll(getLongestPath(row, column+1));
         }
 
-        if (row-1 >= 0 && inputArray[row-1][column] < inputArray[row][column]) {
-            tmax.addAll(getLongestPath(row-1, column));
+        if (row-1 >= 0 && input[row-1][column] < input[row][column]) {
+            topMax.addAll(getLongestPath(row-1, column));
         }
 
-        if (row+1 < inputArray.length && inputArray[row+1][column] < inputArray[row][column]) {
-            bmax.addAll(getLongestPath(row+1, column));
+        if (row+1 < input.length && input[row+1][column] < input[row][column]) {
+            bottomMax.addAll(getLongestPath(row+1, column));
         }
 
-        ArrayList<Integer> max = maximum(lmax, maximum(rmax, maximum(tmax, bmax)));
+        ArrayList<Integer> max = maximum(leftMax, maximum(rightMax, maximum(topMax, bottomMax)));
         cached[row][column] = max;
         return max;
     }
