@@ -1,4 +1,4 @@
-package src;
+package skiing;
 
 import skiing.Skiing;
 
