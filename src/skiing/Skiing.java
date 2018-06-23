@@ -67,9 +67,9 @@ public class Skiing {
         if(a.size() != b.size()) {
             return a.size() > b.size() ? a : b;
         } else if (a.size() != 0){
-            int steepA = a.get(0) - a.get(a.size()-1);
-            int steepB = b.get(0) - b.get(b.size()-1);
-            return  (steepA > steepB) ? a : b;
+            int slopeA = a.get(0) - a.get(a.size()-1);
+            int slopeB = b.get(0) - b.get(b.size()-1);
+            return  (slopeA > slopeB) ? a : b;
         } else {
             return a;
         }
